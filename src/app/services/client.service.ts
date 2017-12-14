@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireList, AngularFireObject } from 'angularfire2/database/interfaces';
+import { AngularFireList, AngularFireObject } from 'angularfire2/database';
 // import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { Observable } from 'rxjs/Observable';
 import { Client } from '../models/Client';
@@ -8,23 +8,22 @@ import { Client } from '../models/Client';
 @Injectable()
 export class ClientService {
 
-  // clients: AngularFireList<any[]>;
-  clients: Observable<Client[]>;
+  // clients: Observable<any[]>;
+  clients: AngularFireList<any[]>;
   client: AngularFireObject<any>;
 
   constructor(
     public af: AngularFireDatabase
   ) {
-    this.clients = this.af.list('/clients').valueChanges();
-    // af.list('items').snapshotChanges().map(actions => {
-    //   return actions.map(action => ({ $key: action.key, ...action.payload.val() }));
-    // }).subscribe(items => {
-    //   return items.map(item => item.key);
-    // });
+    this.clients = this.af.list('/clients') as AngularFireList<Client[]>;
    }
 
   getClients() {
     return this.clients;
+  }
+
+  newClient(client: Client) {
+    this.clients.push(client);
   }
 
 }

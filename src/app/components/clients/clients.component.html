@@ -6,27 +6,29 @@
     <h5 class="pull-right text-muted">Total Owed: {{totalOwed | currency:"USD":symbol}}</h5>
   </div>
 </div>
-<table *ngIf="clients?.length > 0; else noClients" class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Balance</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of clients">
-      <td>{{ client.$key }}</td>
-      <td>{{ client.firstName }} {{client.lastName}}</td>
-      <td>{{client.email}}</td>
-      <!-- <td>{{ client.phone }}</td> --> 
-      <td>{{client.balance | currency:"USD":symbol}}</td>
-      <td><a href="" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <table *ngIf="clients?.length > 0; else noClients" class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Balance</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{ client.$key }}</td>
+        <td>{{ client.firstName }} {{client.lastName}}</td>
+        <td>{{client.email}}</td>
+        <!-- <td>{{ client.phone }}</td> --> 
+        <td>{{client.balance | currency:"USD":symbol}}</td>
+        <td><a href="" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-circle-o-right"></i> Details</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <ng-template #noClients>
   <hr>
